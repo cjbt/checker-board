@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 function App() {
   const [state, setState] = useState([]);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     // create 8x8 grid
@@ -30,23 +31,31 @@ function App() {
     setState(init);
   }, []);
 
+  const handleStart = () => {
+    setStart(true);
+  };
+
   if (!state.length) return <h1>Loading...</h1>;
 
   return (
     <StyledApp>
-      <StyledCheckerBoardContainer>
-        {state.map(column => {
-          return (
-            <StyledColumn>
-              <StyledRow>
-                {column.map(row => {
-                  return <StyledRowItem>{row}</StyledRowItem>;
-                })}
-              </StyledRow>
-            </StyledColumn>
-          );
-        })}
-      </StyledCheckerBoardContainer>
+      {start ? (
+        <StyledCheckerBoardContainer>
+          {state.map(column => {
+            return (
+              <StyledColumn>
+                <StyledRow>
+                  {column.map(row => {
+                    return <StyledRowItem>{row}</StyledRowItem>;
+                  })}
+                </StyledRow>
+              </StyledColumn>
+            );
+          })}
+        </StyledCheckerBoardContainer>
+      ) : (
+        <StyledButton onClick={handleStart}>Start</StyledButton>
+      )}
     </StyledApp>
   );
 }
@@ -69,6 +78,9 @@ const StyledRowItem = styled.div`
   width: 75px;
   height: 75px;
   border: 1px solid yellow;
+`;
+const StyledButton = styled.button`
+  padding: 20px 50px;
 `;
 
 export default App;
