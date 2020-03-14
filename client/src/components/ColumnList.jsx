@@ -1,7 +1,7 @@
 import React from 'react';
 import Column from './Column';
 
-const ColumnList = ({ state, selectCurrentPos, currentPosition }) => {
+const ColumnList = ({ state, selectCurrentPos, currentPosition, move }) => {
   return (
     <>
       {state.map((column, i) => (
@@ -9,6 +9,7 @@ const ColumnList = ({ state, selectCurrentPos, currentPosition }) => {
           column={column}
           key={i}
           y={i}
+          move={move}
           selectCurrentPos={selectCurrentPos}
           currentPosition={currentPosition}
         />

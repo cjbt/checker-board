@@ -40,10 +40,57 @@ function App() {
     setStart(true);
   };
 
+  const handleReset = () => {
+    init();
+    setCurrentPosition([]);
+  };
+
   const selectCurrentPos = tuple => {
     setCurrentPosition(tuple);
   };
 
+  const move = (currentPos, nextPos) => {
+    let grid = [...state];
+    // you cannot select an empty position
+    if (grid[currentPos[0]][currentPos[1]] === 0)
+      return new Error('Not a currentPos');
+    // you cannot move to a non-empty position
+    if (grid[nextPos[0]][nextPos[1]] > 0) return new Error('Space not empty');
+    if (currentPos[1] === nextPos[1])
+      return new Error('You can only move diagonally');
+    if (nextPos[0] >= currentPos[0] + 1) return new Error('invalid move');
+
+    // swap current position to next position
+    const newGrid = grid.map((outer, i) => {
+      if (i === currentPos[0]) {
+        return outer.map((inner, index) => {
+          if (index === currentPos[1]) {
+            return grid[nextPos[0]][nextPos[1]];
+          }
+          return inner;
+        });
+      } else if (i === nextPos[0]) {
+        // edge, transform to 2
+        if (i === 0) {
+          return outer.map((inner, index) => {
+            if (index === nextPos[1]) {
+              return 2;
+            }
+            return inner;
+          });
+        }
+        return outer.map((inner, index) => {
+          if (index === nextPos[1]) {
+            return grid[currentPos[0]][currentPos[1]];
+          }
+          return inner;
+        });
+      }
+      return outer;
+    });
+    setState(newGrid);
+  };
+  console.log(state);
   if (!state.length) return <h1>Loading...</h1>;
 
   return (
@@ -54,9 +101,10 @@ function App() {
             state={state}
             selectCurrentPos={selectCurrentPos}
             currentPosition={currentPosition}
+            move={move}
           />
           <StyledInfo>
-            <StyledButton onClick={init}>Reset</StyledButton>
+            <StyledButton onClick={handleReset}>Reset</StyledButton>
             <p>current: {JSON.stringify(currentPosition)}</p>
           </StyledInfo>
         </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Row from './Row';
 
-const RowList = ({ column, y, selectCurrentPos, currentPosition }) => {
+const RowList = ({ column, y, selectCurrentPos, currentPosition, move }) => {
   return (
     <>
       {column.map((row, i) => (
@@ -10,6 +10,7 @@ const RowList = ({ column, y, selectCurrentPos, currentPosition }) => {
           key={i}
           x={i}
           y={y}
+          move={move}
           selectCurrentPos={selectCurrentPos}
           currentPosition={currentPosition}
         />

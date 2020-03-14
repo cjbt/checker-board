@@ -5,6 +5,7 @@ import RowList from './RowList';
 const Column = ({
   column,
   y,
+  move,
   selectCurrentPos,
   currentPosition = { currentPosition }
 }) => {
@@ -14,6 +15,7 @@ const Column = ({
         <RowList
           column={column}
           y={y}
+          move={move}
           selectCurrentPos={selectCurrentPos}
           currentPosition={currentPosition}
         />

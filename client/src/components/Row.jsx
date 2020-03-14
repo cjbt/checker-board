@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const Row = ({ row, x, y, selectCurrentPos, currentPosition }) => {
+const Row = ({ row, x, y, selectCurrentPos, currentPosition, move }) => {
   const [selected, setSelected] = useState(false);
+  const [position, setPosition] = useState([]);
 
   const handleClick = () => {
-    selectCurrentPos([y, x]);
+    if (currentPosition.length > 0) {
+      handleMove();
+    } else {
+      selectCurrentPos([y, x]);
+    }
+  };
+
+  const handleMove = () => {
+    move(currentPosition, [y, x]);
+    selectCurrentPos([]);
   };
 
   useEffect(() => {
@@ -15,6 +25,7 @@ const Row = ({ row, x, y, selectCurrentPos, currentPosition }) => {
       setSelected(false);
     }
   }, [x, y, currentPosition]);
+  console.log('position: ', position, 'currentPosition:', currentPosition);
   return (
     <StyledRowItem onClick={handleClick} selected={selected}>
       {row === 1 && <StyledCircle />}
