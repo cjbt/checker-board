@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const Row = ({ row }) => {
+const Row = ({ row, x, y, selectCurrentPos, currentPosition }) => {
+  const [selected, setSelected] = useState(false);
+
+  const handleClick = () => {
+    selectCurrentPos([y, x]);
+  };
+
+  useEffect(() => {
+    if (y === currentPosition[0] && x === currentPosition[1]) {
+      setSelected(true);
+    } else {
+      setSelected(false);
+    }
+  }, [x, y, currentPosition]);
   return (
-    <StyledRowItem>
+    <StyledRowItem onClick={handleClick} selected={selected}>
       {row === 1 && <StyledCircle />}
       {row === 2 && <StyledSquare />}
     </StyledRowItem>
@@ -16,6 +29,7 @@ const StyledRowItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ selected }) => (selected ? 'black' : 'white')};
 `;
 const StyledCircle = styled.div`
   width: 50px;

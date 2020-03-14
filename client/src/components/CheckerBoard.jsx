@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import ColumnList from './ColumnList';
 
-const CheckerBoard = ({ state }) => {
+const CheckerBoard = ({ state, selectCurrentPos, currentPosition }) => {
   return (
     <StyledCheckerBoardContainer>
-      <ColumnList state={state} />
+      <ColumnList
+        state={state}
+        selectCurrentPos={selectCurrentPos}
+        currentPosition={currentPosition}
+      />
     </StyledCheckerBoardContainer>
   );
 };

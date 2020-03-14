@@ -2,11 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import RowList from './RowList';
 
-const Column = ({ column }) => {
+const Column = ({
+  column,
+  y,
+  selectCurrentPos,
+  currentPosition = { currentPosition }
+}) => {
   return (
     <StyledColumn>
       <StyledRow>
-        <RowList column={column} />
+        <RowList
+          column={column}
+          y={y}
+          selectCurrentPos={selectCurrentPos}
+          currentPosition={currentPosition}
+        />
       </StyledRow>
     </StyledColumn>
   );

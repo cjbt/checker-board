@@ -4,7 +4,8 @@ import CheckerBoard from './components/CheckerBoard';
 
 function App() {
   const [state, setState] = useState([]);
-  const [start, setStart] = useState(false);
+  const [start, setStart] = useState(true);
+  const [currentPosition, setCurrentPosition] = useState([]);
 
   useEffect(() => {
     init();
@@ -39,14 +40,25 @@ function App() {
     setStart(true);
   };
 
+  const selectCurrentPos = tuple => {
+    setCurrentPosition(tuple);
+  };
+
   if (!state.length) return <h1>Loading...</h1>;
 
   return (
     <StyledApp>
       {start ? (
         <>
-          <CheckerBoard state={state} />
-          <StyledButton onClick={init}>Reset</StyledButton>
+          <CheckerBoard
+            state={state}
+            selectCurrentPos={selectCurrentPos}
+            currentPosition={currentPosition}
+          />
+          <StyledInfo>
+            <StyledButton onClick={init}>Reset</StyledButton>
+            <p>current: {JSON.stringify(currentPosition)}</p>
+          </StyledInfo>
         </>
       ) : (
         <StyledButton onClick={handleStart}>Start</StyledButton>
@@ -57,10 +69,14 @@ function App() {
 
 const StyledApp = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 `;
-
+const StyledInfo = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
 const StyledButton = styled.button`
   padding: 20px 50px;
 `;
