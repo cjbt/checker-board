@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import CheckerBoard from './components/CheckerBoard';
 
 function App() {
   const [state, setState] = useState([]);
@@ -44,19 +45,7 @@ function App() {
     <StyledApp>
       {start ? (
         <>
-          <StyledCheckerBoardContainer>
-            {state.map((column, i) => {
-              return (
-                <StyledColumn>
-                  <StyledRow>
-                    {column.map(row => {
-                      return <StyledRowItem>{row}</StyledRowItem>;
-                    })}
-                  </StyledRow>
-                </StyledColumn>
-              );
-            })}
-          </StyledCheckerBoardContainer>
+          <CheckerBoard state={state} />
           <StyledButton onClick={init}>Reset</StyledButton>
         </>
       ) : (
@@ -71,20 +60,7 @@ const StyledApp = styled.div`
   max-width: 800px;
   margin: 0 auto;
 `;
-const StyledCheckerBoardContainer = styled.div`
-  width: 600px;
-  max-width: 600px;
-  border: 2px solid black;
-`;
-const StyledColumn = styled.div``;
-const StyledRow = styled.div`
-  display: flex;
-`;
-const StyledRowItem = styled.div`
-  width: 75px;
-  height: 75px;
-  border: 1px solid yellow;
-`;
+
 const StyledButton = styled.button`
   padding: 20px 50px;
 `;
