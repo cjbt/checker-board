@@ -6,10 +6,14 @@ function App() {
   const [start, setStart] = useState(false);
 
   useEffect(() => {
+    init();
+  }, []);
+
+  const init = () => {
     // create 8x8 grid
     const grid = new Array(8).fill(new Array(8).fill(0));
     // initialize with checkers in position
-    const init = grid.map((outer, i) => {
+    const initializePosition = grid.map((outer, i) => {
       if (i === 5 || i === 7) {
         return outer.map((inner, index) => {
           if (index === 1 || index === 3 || index === 5 || index === 7) {
@@ -27,9 +31,8 @@ function App() {
       }
       return outer;
     });
-
-    setState(init);
-  }, []);
+    setState(initializePosition);
+  };
 
   const handleStart = () => {
     setStart(true);
@@ -40,19 +43,22 @@ function App() {
   return (
     <StyledApp>
       {start ? (
-        <StyledCheckerBoardContainer>
-          {state.map(column => {
-            return (
-              <StyledColumn>
-                <StyledRow>
-                  {column.map(row => {
-                    return <StyledRowItem>{row}</StyledRowItem>;
-                  })}
-                </StyledRow>
-              </StyledColumn>
-            );
-          })}
-        </StyledCheckerBoardContainer>
+        <>
+          <StyledCheckerBoardContainer>
+            {state.map((column, i) => {
+              return (
+                <StyledColumn>
+                  <StyledRow>
+                    {column.map(row => {
+                      return <StyledRowItem>{row}</StyledRowItem>;
+                    })}
+                  </StyledRow>
+                </StyledColumn>
+              );
+            })}
+          </StyledCheckerBoardContainer>
+          <StyledButton onClick={init}>Reset</StyledButton>
+        </>
       ) : (
         <StyledButton onClick={handleStart}>Start</StyledButton>
       )}
