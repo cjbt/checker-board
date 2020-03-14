@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
 
 function App() {
   const [state, setState] = useState([]);
@@ -32,11 +31,44 @@ function App() {
   }, []);
 
   if (!state.length) return <h1>Loading...</h1>;
+
   return (
-    <div className="App">
-      <h1>hello</h1>
-    </div>
+    <StyledApp>
+      <StyledCheckerBoardContainer>
+        {state.map(column => {
+          return (
+            <StyledColumn>
+              <StyledRow>
+                {column.map(row => {
+                  return <StyledRowItem>{row}</StyledRowItem>;
+                })}
+              </StyledRow>
+            </StyledColumn>
+          );
+        })}
+      </StyledCheckerBoardContainer>
+    </StyledApp>
   );
 }
+
+const StyledApp = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+`;
+const StyledCheckerBoardContainer = styled.div`
+  width: 600px;
+  max-width: 600px;
+  border: 2px solid black;
+`;
+const StyledColumn = styled.div``;
+const StyledRow = styled.div`
+  display: flex;
+`;
+const StyledRowItem = styled.div`
+  width: 75px;
+  height: 75px;
+  border: 1px solid yellow;
+`;
 
 export default App;
