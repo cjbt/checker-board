@@ -17,6 +17,11 @@ $ yarn install
 $ yarn start
 ```
 
+### Env vars
+```
+REACT_APP_BASE_URL=http://localhost:4000/api/state
+```
+
 ## Testing
 
 ```bash
