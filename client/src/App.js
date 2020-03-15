@@ -10,8 +10,8 @@ function App() {
 
   useEffect(() => {
     axios.get('https://bw-pt-bucket-list.herokuapp.com/api/state').then(res => {
-      console.log('hello: ', res.data);
-      setState(JSON.parse(res.data.state));
+      console.log('hello: ', res.data.state);
+      setState(res.data.state);
     });
   }, []);
 
