@@ -85,6 +85,7 @@ function App() {
       return new Error('invalid move');
     // can't move side to side
     if (nextPos[0] === currentPos[0]) return new Error('invalid move');
+    if (nextPos[0] <= currentPos[0] - 2) return new Error('invalid move');
 
     // swap current position to next position
     const newGrid = grid.map((outer, i) => {
