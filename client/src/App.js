@@ -121,22 +121,16 @@ function App() {
 
   return (
     <StyledApp>
-      {start ? (
-        <>
-          <CheckerBoard
-            state={state}
-            selectCurrentPos={selectCurrentPos}
-            currentPosition={currentPosition}
-            move={move}
-          />
-          <StyledInfo>
-            <StyledButton onClick={handleReset}>Reset</StyledButton>
-            <p>current: {JSON.stringify(currentPosition)}</p>
-          </StyledInfo>
-        </>
-      ) : (
-        <StyledButton onClick={handleStart}>Start</StyledButton>
-      )}
+      <CheckerBoard
+        state={state}
+        selectCurrentPos={selectCurrentPos}
+        currentPosition={currentPosition}
+        move={move}
+      />
+      <StyledInfo>
+        <StyledButton onClick={handleReset}>Reset</StyledButton>
+        <p>current: {JSON.stringify(currentPosition)}</p>
+      </StyledInfo>
     </StyledApp>
   );
 }

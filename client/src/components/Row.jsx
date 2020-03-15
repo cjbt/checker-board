@@ -40,6 +40,10 @@ const StyledRowItem = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ selected }) => (selected ? 'black' : 'white')};
+
+  &:hover {
+    background-color: yellow;
+  }
 `;
 const StyledCircle = styled.div`
   width: 50px;
