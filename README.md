@@ -1,6 +1,6 @@
 # checker-board
 
-## installation
+## Installation
 
 ```bash
 $ https://github.com/cjbt/checker-board.git
@@ -14,4 +14,10 @@ $ yarn server
 $ cd client
 $ yarn install
 $ yarn start
+```
+
+## Testing
+
+```bash
+$ yarn test
 ```
