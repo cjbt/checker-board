@@ -1,4 +1,5 @@
 # checker-board
+Deployed: https://checkers-dusky.now.sh/
 
 ## Installation
 
