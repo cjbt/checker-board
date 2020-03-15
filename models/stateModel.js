@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig');
 
 const get = async () => {
-  const res = await db('checkers');
+  const res = await db('checkers').first();
   return res;
 };
 

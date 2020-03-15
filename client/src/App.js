@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import CheckerBoard from './components/CheckerBoard';
 
@@ -8,7 +9,10 @@ function App() {
   const [currentPosition, setCurrentPosition] = useState([]);
 
   useEffect(() => {
-    init();
+    axios.get('https://bw-pt-bucket-list.herokuapp.com/api/state').then(res => {
+      console.log('hello: ', res.data);
+      setState(JSON.parse(res.data.state));
+    });
   }, []);
 
   const init = () => {
