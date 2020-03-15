@@ -15,7 +15,15 @@ function App() {
     });
   }, []);
 
-  const init = () => {
+  useEffect(() => {
+    if (state.length) {
+      axios
+        .put('https://bw-pt-bucket-list.herokuapp.com/api/state', { state })
+        .then(res => console.log(res, 'changed!'));
+    }
+  }, [state, setState]);
+
+  const init = async () => {
     // create 8x8 grid
     const grid = new Array(8).fill(new Array(8).fill(0));
     // initialize with checkers in position
@@ -37,6 +45,7 @@ function App() {
       }
       return outer;
     });
+
     setState(initializePosition);
   };
 
@@ -53,7 +62,7 @@ function App() {
     setCurrentPosition(tuple);
   };
 
-  const move = (currentPos, nextPos) => {
+  const move = async (currentPos, nextPos) => {
     let grid = [...state];
     // you cannot select an empty position
     if (grid[currentPos[0]][currentPos[1]] === 0)
@@ -92,6 +101,7 @@ function App() {
       }
       return outer;
     });
+
     setState(newGrid);
   };
   console.log(state);
