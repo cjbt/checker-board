@@ -14,6 +14,8 @@ router.get('/', async (req, res) => {
 
 router.put('/', async (req, res) => {
   const { state } = req.body;
+  if (!state) res.status(422).json({ message: 'missing fields' });
+
   try {
     let result = await db.update(1, { state: JSON.stringify(state) });
     res.status(200).json(result);
