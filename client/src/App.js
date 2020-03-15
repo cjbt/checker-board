@@ -9,16 +9,24 @@ function App() {
   const [currentPosition, setCurrentPosition] = useState([]);
 
   useEffect(() => {
-    axios.get('https://bw-pt-bucket-list.herokuapp.com/api/state').then(res => {
-      console.log('hello: ', res.data.state);
-      setState(res.data.state);
-    });
+    axios
+      .get(
+        process.env.REACT_APP_BASE_URL ||
+          'https://bw-pt-bucket-list.herokuapp.com/api/state'
+      )
+      .then(res => {
+        setState(res.data.state);
+      });
   }, []);
 
   useEffect(() => {
     if (state.length) {
       axios
-        .put('https://bw-pt-bucket-list.herokuapp.com/api/state', { state })
+        .put(
+          process.env.REACT_APP_BASE_URL ||
+            'https://bw-pt-bucket-list.herokuapp.com/api/state',
+          { state }
+        )
         .then(res => console.log(res, 'changed!'));
     }
   }, [state, setState]);
@@ -104,7 +112,6 @@ function App() {
 
     setState(newGrid);
   };
-  console.log(state);
   if (!state.length) return <h1>Loading...</h1>;
 
   return (

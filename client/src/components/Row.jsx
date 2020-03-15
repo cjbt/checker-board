@@ -25,7 +25,6 @@ const Row = ({ row, x, y, selectCurrentPos, currentPosition, move }) => {
       setSelected(false);
     }
   }, [x, y, currentPosition]);
-  console.log('position: ', position, 'currentPosition:', currentPosition);
   return (
     <StyledRowItem onClick={handleClick} selected={selected}>
       {row === 1 && <StyledCircle />}
