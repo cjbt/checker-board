@@ -10,14 +10,6 @@ describe('state router', () => {
     expect(res.status).toBe(200);
   });
 
-  it('should return 422 if state is not sent', async () => {
-    const res = await request(server)
-      .post(`${ENDPOINT}`)
-      .send({});
-
-    expect(res.status).toBe(422);
-  });
-
   it('should return 200 if updated succesfully', async () => {
     const res = await request(server)
       .post(`${ENDPOINT}`)
