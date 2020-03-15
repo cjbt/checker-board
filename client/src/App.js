@@ -80,6 +80,11 @@ function App() {
     if (currentPos[1] === nextPos[1])
       return new Error('You can only move diagonally');
     if (nextPos[0] >= currentPos[0] + 1) return new Error('invalid move');
+    // can't move more than 1 diagonal spaces
+    if (nextPos[1] > currentPos[1] + 1 || nextPos[1] < currentPos[1] - 1)
+      return new Error('invalid move');
+    // can't move side to side
+    if (nextPos[0] === currentPos[0]) return new Error('invalid move');
 
     // swap current position to next position
     const newGrid = grid.map((outer, i) => {
