@@ -2,8 +2,26 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Row = ({ row, x, y, selectCurrentPos, currentPosition, move }) => {
+  const [color, setColor] = useState('');
+
+  useEffect(() => {
+    // set color of reach divs
+    if (y === 1 || y === 3 || y === 5 || y === 7) {
+      if (x === 1 || x === 3 || x === 5 || x === 7) {
+        setColor('black');
+      } else {
+        setColor('red');
+      }
+    } else if (y === 0 || y === 2 || y === 4 || y === 6) {
+      if (x === 0 || x === 2 || x === 4 || x === 6) {
+        setColor('black');
+      } else {
+        setColor('red');
+      }
+    }
+  }, [x, y]);
+
   const [selected, setSelected] = useState(false);
-  const [position, setPosition] = useState([]);
 
   const handleClick = () => {
     if (currentPosition.length > 0) {
@@ -26,7 +44,7 @@ const Row = ({ row, x, y, selectCurrentPos, currentPosition, move }) => {
     }
   }, [x, y, currentPosition]);
   return (
-    <StyledRowItem onClick={handleClick} selected={selected}>
+    <StyledRowItem onClick={handleClick} selected={selected} color={color}>
       {row === 1 && <StyledCircle />}
       {row === 2 && <StyledSquare />}
     </StyledRowItem>
@@ -39,7 +57,7 @@ const StyledRowItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ selected }) => (selected ? 'black' : 'white')};
+  background-color: ${({ selected, color }) => (selected ? 'yellow' : color)};
 
   &:hover {
     background-color: yellow;
